@@ -1,0 +1,5 @@
+A,25,Name
+B,20,roll no
+C,15,Marks
+D,30,performance
+E,10,exam

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pie Chart </title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 42px;
+		}
+		canvas {
+			display: block;
+			margin: 0 auto;
+			margin-top: 20px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			border-radius: 4px;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Pie Chart</h1>
+	<canvas id="myChart" width="400" height="400"></canvas>
+	<script>
+		// Function to fetch data from text file and draw chart
+		function Drawchart() {
+			$.get("data.txt", function(data) {
+				var labels = [];
+				var values = [];
+				var rows = data.split("\n");
+				for (var i = 0; i < rows.length; i++) {
+					var row = rows[i].split(",");
+					labels.push(row[0]);
+					values.push(row[1]);
+				}
+				var ctx = document.getElementById('myChart').getContext('2d');
+				var chart = new Chart(ctx, {
+					type: 'pie',
+					data: {
+						labels: labels,
+						datasets: [{
+							label: 'Pie Chart',
+							backgroundColor: [
+								'rgb(255, 99, 132)',
+								'rgb(54, 162, 235)',
+								'rgb(255, 205, 86)'
+							],
+							data: values
+						}]
+					},
+					options: {}
+				});
+			});
+		}
+
+		// Initial fetch and draw chart
+		Drawchart();
+
+		// Refresh chart every 15 seconds
+		setInterval(Drawchart, 15000);
+	</script>
+</body>
+</html>
